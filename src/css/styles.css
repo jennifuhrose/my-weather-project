@@ -1,0 +1,44 @@
+body {
+  font-family: "Public Sans", sans-serif;
+}
+.card {
+  display: block;
+  width: 700px;
+  border-width: 5px;
+  border-color: rgb(119, 31, 153);
+}
+.main-card {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.card .mb-3 {
+  border-width: 0px;
+}
+.forecast {
+  font-size: 24px;
+  color: purple;
+}
+.main-icon {
+  font-size: 160px;
+  color: purple;
+}
+.search-bar {
+  width: 350px;
+}
+.therm {
+  color: purple;
+}
+.signature {
+  text-align: center;
+}
+.descriptor {
+  text-transform: capitalize;
+}
+.btn {
+  background-color: rgb(119, 31, 153);
+  border-color: rgb(119, 31, 153);
+}
+.btn:hover {
+  background-color: rgb(58, 16, 75);
+  border-color: rgb(58, 16, 75);
+}
