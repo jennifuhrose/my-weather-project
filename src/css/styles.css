@@ -1,12 +1,14 @@
 body {
   font-family: "Public Sans", sans-serif;
+  background-color: #937dc2;
 }
 .card {
   display: block;
   margin: 0 auto;
   width: 700px;
   border-width: 5px;
-  border-color: rgb(119, 31, 153);
+  border-color: rgb(103, 64, 185);
+  background-color: #fcc5c0;
 }
 .main-card {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
@@ -17,17 +19,17 @@ body {
 }
 .forecast {
   font-size: 24px;
-  color: purple;
+  color: #c689c6;
 }
 .main-icon {
   font-size: 160px;
-  color: purple;
+  color: #c689c6;
 }
 .search-bar {
   width: 350px;
 }
 .therm {
-  color: purple;
+  color: #c689c6;
 }
 .signature {
   text-align: center;
@@ -36,10 +38,10 @@ body {
   text-transform: capitalize;
 }
 .btn {
-  background-color: rgb(119, 31, 153);
-  border-color: rgb(119, 31, 153);
+  background-color: #e8a0bf;
+  border-color: #e8a0bf;
 }
 .btn:hover {
-  background-color: rgb(58, 16, 75);
-  border-color: rgb(58, 16, 75);
+  background-color: rgb(182, 128, 151);
+  border-color: rgb(182, 128, 151);
 }
