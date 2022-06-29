@@ -87,6 +87,46 @@ search("Milwaukee");
 let searchBox = document.querySelector("#search-bar-form");
 searchBox.addEventListener("submit", submitSearch);
 
+let clickMilwaukee = document.querySelector("#milwaukee");
+clickMilwaukee.addEventListener("click", searchMilwaukee);
+
+function searchMilwaukee(event) {
+  event.preventDefault();
+  let currentCity = document.querySelector("#current-city");
+  currentCity.innerHTML = "Milwaukee";
+  search("Milwaukee");
+}
+
+let clickChicago = document.querySelector("#chicago");
+clickChicago.addEventListener("click", searchChicago);
+
+function searchChicago(event) {
+  event.preventDefault();
+  let currentCity = document.querySelector("#current-city");
+  currentCity.innerHTML = "Chicago";
+  search("Chicago");
+}
+
+let clickStLouis = document.querySelector("#st-louis");
+clickStLouis.addEventListener("click", searchStLouis);
+
+function searchStLouis(event) {
+  event.preventDefault();
+  let currentCity = document.querySelector("#current-city");
+  currentCity.innerHTML = "St Louis";
+  search("St Louis");
+}
+
+let clickDenver = document.querySelector("#denver");
+clickDenver.addEventListener("click", searchDenver);
+
+function searchDenver(event) {
+  event.preventDefault();
+  let currentCity = document.querySelector("#current-city");
+  currentCity.innerHTML = "Denver";
+  search("Denver");
+}
+
 function showTemperature(response) {
   console.log(response.data);
   tempMath = response.data.main.temp;
@@ -127,5 +167,4 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 let currentButton = document.querySelector("#current-location");
-
 currentButton.addEventListener("click", getCurrentLocation);

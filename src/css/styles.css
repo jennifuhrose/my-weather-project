@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
   width: 700px;
   border-width: 5px;
-  border-color: rgb(103, 64, 185);
+  border-color: #6740b9;
   background-color: #f0e3ff;
 }
 .main-card {
@@ -42,6 +42,19 @@ body {
   border-color: #e8a0bf;
 }
 .btn:hover {
-  background-color: rgb(182, 128, 151);
-  border-color: rgb(182, 128, 151);
+  background-color: #b68097;
+  border-color: #b68097;
+}
+
+.cities-top {
+  transition: all 200ms ease;
+  opacity: 1;
+  text-decoration: none;
+  color: #937dc2;
+  font-weight: 500;
+}
+
+.cities-top:hover {
+  color: #6740b9;
+  text-decoration: underline;
 }
