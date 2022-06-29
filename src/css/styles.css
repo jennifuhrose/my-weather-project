@@ -4,7 +4,7 @@ body {
 }
 .card {
   display: block;
-  margin: 0 auto;
+  margin: 30px auto;
   width: 700px;
   border-width: 5px;
   border-color: #6740b9;
