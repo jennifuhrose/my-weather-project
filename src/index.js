@@ -6,18 +6,18 @@ function formatDate(date) {
   let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 
   let months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   let day = days[date.getDay()];
@@ -28,7 +28,7 @@ function formatDate(date) {
   let minute = String(date.getMinutes()).padStart(2, "0");
 
   let currentDate = document.querySelector("#current-date");
-  currentDate.innerHTML = `${day} `;
+  currentDate.innerHTML = `${day}, ${month} ${cDate} `;
 
   let currentTime = document.querySelector("#current-time");
   currentTime.innerHTML = `${hour}:${minute}`;
@@ -65,23 +65,24 @@ celsiusTemp.addEventListener("click", makeCelsius);
 
 //Search Bar & Submit Button
 
-let city = "Milwaukee";
-let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrl).then(showTemperature);
-
 function submitSearch(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar-proper");
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = `${searchInput.value}`;
 
+  search(searchInput.value);
+}
+
+function search(city) {
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let unit = "imperial";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=${unit}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
 
   axios.get(apiUrl).then(showTemperature);
 }
+
+search("Milwaukee");
 
 let searchBox = document.querySelector("#search-bar-form");
 searchBox.addEventListener("submit", submitSearch);
@@ -108,6 +109,7 @@ function searchCity(response) {
   );
   axios.get(apiUrl).then(showTemperature);
 }
+
 //current location button
 
 function searchLocation(position) {
