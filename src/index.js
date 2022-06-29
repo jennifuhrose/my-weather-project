@@ -83,7 +83,10 @@ function search(city) {
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let unit = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
-
+  fahrenheitTemp.classList.add("active");
+  celsiusTemp.classList.remove("active");
+  celsiusTemp.classList.add("inactive");
+  fahrenheitTemp.classList.remove("inactive");
   axios.get(apiUrl).then(showTemperature);
 }
 
