@@ -5,7 +5,7 @@ body {
 .card {
   display: block;
   margin: 30px auto;
-  width: 700px;
+  max-width: 700px;
   border-width: 5px;
   border-color: #6740b9;
   background-color: #f0e3ff;
@@ -57,4 +57,23 @@ body {
 .cities-top:hover {
   color: #6740b9;
   text-decoration: underline;
+}
+
+.active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+.active:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.inactive {
+  text-decoration: none;
+  color: #937dc2;
+}
+.inactive:hover {
+  text-decoration: none;
+  color: #6740b9;
 }

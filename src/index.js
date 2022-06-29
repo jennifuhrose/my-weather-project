@@ -38,19 +38,24 @@ formatDate(cTime);
 
 //Temperature Math & Conversions
 
-function makeCelsius(event) {
+function displayCelsius(event) {
   event.preventDefault();
   let newTemp = ((tempMath - 32.0) * 5.0) / 9.0;
   let tempConvert = Math.round(newTemp);
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemp.classList.add("active");
+  celsiusTemp.classList.remove("inactive");
+  fahrenheitTemp.classList.add("inactive");
   mainTemp.innerHTML = `${tempConvert}`;
-  tempMath = newTemp;
 }
-function makeFahrenheit(event) {
+function displayFahrenheit(event) {
   event.preventDefault();
-  let newTemp = (tempMath * 9.0) / 5.0 + 32.0;
-  let tempConvert = Math.round(newTemp);
+  let tempConvert = Math.round(tempMath);
+  fahrenheitTemp.classList.add("active");
+  celsiusTemp.classList.remove("active");
+  celsiusTemp.classList.add("inactive");
+  fahrenheitTemp.classList.remove("inactive");
   mainTemp.innerHTML = `${tempConvert}`;
-  tempMath = newTemp;
 }
 
 let tempMath = 0;
@@ -59,11 +64,11 @@ let mainTemp = document.querySelector("#main-temp");
 let fahrenheitTemp = document.querySelector("#fahrenheit");
 let celsiusTemp = document.querySelector("#celsius");
 
-fahrenheitTemp.addEventListener("click", makeFahrenheit);
+fahrenheitTemp.addEventListener("click", displayFahrenheit);
 
-celsiusTemp.addEventListener("click", makeCelsius);
+celsiusTemp.addEventListener("click", displayCelsius);
 
-//Search Bar & Submit Button
+//Search Bar, Top Cities Search, & Submit Button
 
 function submitSearch(event) {
   event.preventDefault();
