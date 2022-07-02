@@ -1,7 +1,3 @@
-//Time & Date
-
-let cTime = new Date();
-
 function formatDate(date) {
   let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 
@@ -33,11 +29,6 @@ function formatDate(date) {
   let currentTime = document.querySelector("#current-time");
   currentTime.innerHTML = `${hour}:${minute}`;
 }
-
-formatDate(cTime);
-
-//Temperature Math & Conversions
-
 function displayCelsius(event) {
   event.preventDefault();
   let newTemp = ((tempMath - 32.0) * 5.0) / 9.0;
@@ -57,19 +48,6 @@ function displayFahrenheit(event) {
   fahrenheitTemp.classList.remove("inactive");
   mainTemp.innerHTML = `${tempConvert}`;
 }
-
-let tempMath = 0;
-
-let mainTemp = document.querySelector("#main-temp");
-let fahrenheitTemp = document.querySelector("#fahrenheit");
-let celsiusTemp = document.querySelector("#celsius");
-
-fahrenheitTemp.addEventListener("click", displayFahrenheit);
-
-celsiusTemp.addEventListener("click", displayCelsius);
-
-//Search Bar, Top Cities Search, & Submit Button
-
 function submitSearch(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar-proper");
@@ -78,7 +56,6 @@ function submitSearch(event) {
 
   search(searchInput.value);
 }
-
 function search(city) {
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let unit = "imperial";
@@ -89,67 +66,38 @@ function search(city) {
   fahrenheitTemp.classList.remove("inactive");
   axios.get(apiUrl).then(showTemperature);
 }
-
-search("Milwaukee");
-
-let searchBox = document.querySelector("#search-bar-form");
-searchBox.addEventListener("submit", submitSearch);
-
-let clickMilwaukee = document.querySelector("#milwaukee");
-clickMilwaukee.addEventListener("click", searchMilwaukee);
-
 function searchMilwaukee(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "Milwaukee";
   search("Milwaukee");
 }
-
-let clickChicago = document.querySelector("#chicago");
-clickChicago.addEventListener("click", searchChicago);
-
 function searchChicago(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "Chicago";
   search("Chicago");
 }
-
-let clickStLouis = document.querySelector("#st-louis");
-clickStLouis.addEventListener("click", searchStLouis);
-
 function searchStLouis(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "St Louis";
   search("St Louis");
 }
-
-let clickDenver = document.querySelector("#denver");
-clickDenver.addEventListener("click", searchDenver);
-
 function searchDenver(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "Denver";
   search("Denver");
 }
-
 function iconDayNight(response) {
-  // Get weatherData from API
   let weatherData = response.data;
-  /* Get suitable icon for weather */
-  // Create new date representing the local Time
   const now = new Date();
-  // Converto to UTC Date
   const date = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-  // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + weatherData.timezone * 1000;
   const localTime = new Date(millisecondsOffsetUTC);
-  // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(weatherData.sys.sunrise * 1000);
   const sunset = new Date(weatherData.sys.sunset * 1000);
-  // Get correct weather icon for day/night periods
   let mainIcon = document.querySelector("#big-icon");
   if (date > sunrise && date < sunset) {
     let mainIconID = `wi wi-owm-day-${weatherData.weather[0].id}`;
@@ -159,7 +107,6 @@ function iconDayNight(response) {
     mainIcon.className = mainIconID;
   }
 }
-
 function showTemperature(response) {
   console.log(response.data);
   tempMath = response.data.main.temp;
@@ -176,9 +123,6 @@ function showTemperature(response) {
   descriptor.innerHTML = response.data.weather[0].description;
   iconDayNight(response);
 }
-
-//current location button
-
 function searchLocation(position) {
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let units = "imperial";
@@ -188,10 +132,30 @@ function searchLocation(position) {
   axios.get(api1Url).then(showTemperature);
   console.log(api1Url);
 }
-
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
+
+let cTime = new Date();
+let tempMath = 0;
+let mainTemp = document.querySelector("#main-temp");
+let fahrenheitTemp = document.querySelector("#fahrenheit");
+fahrenheitTemp.addEventListener("click", displayFahrenheit);
+let celsiusTemp = document.querySelector("#celsius");
+celsiusTemp.addEventListener("click", displayCelsius);
+let searchBox = document.querySelector("#search-bar-form");
+searchBox.addEventListener("submit", submitSearch);
+let clickMilwaukee = document.querySelector("#milwaukee");
+clickMilwaukee.addEventListener("click", searchMilwaukee);
+let clickChicago = document.querySelector("#chicago");
+clickChicago.addEventListener("click", searchChicago);
+let clickStLouis = document.querySelector("#st-louis");
+clickStLouis.addEventListener("click", searchStLouis);
+let clickDenver = document.querySelector("#denver");
+clickDenver.addEventListener("click", searchDenver);
 let currentButton = document.querySelector("#current-location");
 currentButton.addEventListener("click", getCurrentLocation);
+
+formatDate(cTime);
+search("Milwaukee");
