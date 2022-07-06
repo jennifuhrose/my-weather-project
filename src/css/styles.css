@@ -17,7 +17,7 @@ body {
 .card .mb-3 {
   border-width: 0px;
 }
-.forecast {
+.weather-forecast-icon {
   font-size: 24px;
   color: #c689c6;
 }
