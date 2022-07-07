@@ -1,7 +1,3 @@
-//Time & Date
-
-let cTime = new Date();
-
 function formatDate(date) {
   let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 
@@ -34,10 +30,6 @@ function formatDate(date) {
   currentTime.innerHTML = `${hour}:${minute}`;
 }
 
-formatDate(cTime);
-
-//Temperature Math & Conversions
-
 function displayCelsius(event) {
   event.preventDefault();
   let newTemp = ((tempMath - 32.0) * 5.0) / 9.0;
@@ -69,22 +61,8 @@ function displayFahrenheit(event) {
     let forecastConvert = Math.round(newForecastTemp);
     forecastTemp.innerHTML = `${forecastConvert}°F`;
   }
-}
 
-let tempMath = 0;
-let forecastTempMath = ["0", "0", "0", "0", "0", "0"];
-
-let mainTemp = document.querySelector("#main-temp");
-let fahrenheitTemp = document.querySelector("#fahrenheit");
-let celsiusTemp = document.querySelector("#celsius");
-
-fahrenheitTemp.addEventListener("click", displayFahrenheit);
-
-celsiusTemp.addEventListener("click", displayCelsius);
-
-//current location button
-
-function searchLocation(position) {
+  function searchLocation(position) {
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let units = "imperial";
   let latitude = position.coords.latitude;
@@ -98,10 +76,6 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
-let currentButton = document.querySelector("#current-location");
-currentButton.addEventListener("click", getCurrentLocation);
-
-//Search Bar, Top Cities Search, & Submit Button
 
 function submitSearch(event) {
   event.preventDefault();
@@ -123,23 +97,12 @@ function search(city) {
   axios.get(apiUrl).then(showTemperature);
 }
 
-search("Milwaukee");
-
-let searchBox = document.querySelector("#search-bar-form");
-searchBox.addEventListener("submit", submitSearch);
-
-let clickMilwaukee = document.querySelector("#milwaukee");
-clickMilwaukee.addEventListener("click", searchMilwaukee);
-
 function searchMilwaukee(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "Milwaukee";
   search("Milwaukee");
 }
-
-let clickChicago = document.querySelector("#chicago");
-clickChicago.addEventListener("click", searchChicago);
 
 function searchChicago(event) {
   event.preventDefault();
@@ -148,18 +111,12 @@ function searchChicago(event) {
   search("Chicago");
 }
 
-let clickStLouis = document.querySelector("#st-louis");
-clickStLouis.addEventListener("click", searchStLouis);
-
 function searchStLouis(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = "St Louis";
   search("St Louis");
 }
-
-let clickDenver = document.querySelector("#denver");
-clickDenver.addEventListener("click", searchDenver);
 
 function searchDenver(event) {
   event.preventDefault();
@@ -211,7 +168,6 @@ function iconDayNight(response) {
   }
 }
 
-//Forecast
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
@@ -279,3 +235,37 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
 }
+
+let cTime = new Date();
+
+let tempMath = 0;
+let forecastTempMath = ["0", "0", "0", "0", "0", "0"];
+
+let mainTemp = document.querySelector("#main-temp");
+
+let fahrenheitTemp = document.querySelector("#fahrenheit");
+fahrenheitTemp.addEventListener("click", displayFahrenheit);
+
+let celsiusTemp = document.querySelector("#celsius");
+celsiusTemp.addEventListener("click", displayCelsius);
+
+let currentButton = document.querySelector("#current-location");
+currentButton.addEventListener("click", getCurrentLocation);
+
+let searchBox = document.querySelector("#search-bar-form");
+searchBox.addEventListener("submit", submitSearch);
+
+let clickMilwaukee = document.querySelector("#milwaukee");
+clickMilwaukee.addEventListener("click", searchMilwaukee);
+
+let clickChicago = document.querySelector("#chicago");
+clickChicago.addEventListener("click", searchChicago);
+
+let clickStLouis = document.querySelector("#st-louis");
+clickStLouis.addEventListener("click", searchStLouis);
+
+let clickDenver = document.querySelector("#denver");
+clickDenver.addEventListener("click", searchDenver);
+
+formatDate(cTime);
+search("Milwaukee");
