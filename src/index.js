@@ -47,6 +47,11 @@ function displayCelsius(event) {
   celsiusTemp.classList.remove("inactive");
   fahrenheitTemp.classList.add("inactive");
   mainTemp.innerHTML = `${tempConvert}`;
+  for (let index = 1; index < 6; index++) {
+    let forecastTemp = document.querySelector(`#forecast-temp-${[index]}`);
+    let newForecastTemp = ((forecastTemp[index] = 32.0) * 5.0) / 9.0;
+    let forecastConvert = Math.round(newForecastTemp);
+  }
 }
 function displayFahrenheit(event) {
   event.preventDefault();
@@ -221,11 +226,10 @@ function displayForecast(response) {
         `<div class="col">
     <span class="weather-forecast-date">${formatDay(forecastDay.dt)}</span>
     <br /><br />
-    <i class="" id="forecast-${index}"></i>
+    ${iconForecast(response, index)}
     <br /><br />
-    <span class="weather-forecast-temp">${Math.round(
-      forecastDay.temp.day
-    )}</span>°<span class="f-symbol">F</span>
+    <span class="weather-forecast-temp" id="forecast-temp-${[index]}">
+    ${Math.round(forecastDay.temp.day)}</span>°<span class="f-symbol">F</span>
     </div>`;
     }
   });
@@ -246,16 +250,17 @@ function iconForecast(response, index) {
   const millisecondsOffsetUTC = date.getTime() + forecastDay.timezone * 1000;
   const localTime = new Date(millisecondsOffsetUTC);
   // Get local sun phases and convert a unix timestamp to time
-  const sunrise = new Date(forecastDay.sunrise * 1000);
-  const sunset = new Date(forecastDay.sunset * 1000);
+  const sunrise = new Date(forecastDay[index].sunrise * 1000);
+  const sunset = new Date(forecastDay[index].sunset * 1000);
   // Get correct weather icon for day/night periods
   let forecastIcon = document.querySelector(`#forecast-${index}`);
-  if (date > sunrise && date < sunset) {
-    let forecastIconID = `weather-forecast-icon wi wi-owm-day-${forecastDay[index].weather[0].id}`;
-    forecastIcon.className = forecastIconID;
+  if (
+    date.getHours() > sunrise.getHours() &&
+    date.getHours() < sunset.getHours()
+  ) {
+    return `<i class="weather-forecast-icon wi wi-owm-day-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
   } else {
-    let forecastIconID = `weather-forecast-icon wi wi-owm-night-${forecastDay[index].weather[0].id}`;
-    forecastIcon.className = forecastIconID;
+    return `<i class="weather-forecast-icon wi wi-owm-night-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
   }
 }
 
