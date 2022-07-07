@@ -144,20 +144,13 @@ function showTemperature(response) {
 }
 
 function iconDayNight(response) {
-  // Get weatherData from API
   let weatherData = response.data;
-  /* Get suitable icon for weather */
-  // Create new date representing the local Time
   const now = new Date();
-  // Converto to UTC Date
   const date = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-  // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + weatherData.timezone * 1000;
   const localTime = new Date(millisecondsOffsetUTC);
-  // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(weatherData.sys.sunrise * 1000);
   const sunset = new Date(weatherData.sys.sunset * 1000);
-  // Get correct weather icon for day/night periods
   let mainIcon = document.querySelector("#big-icon");
   if (date > sunrise && date < sunset) {
     let mainIconID = `wi wi-owm-day-${weatherData.weather[0].id}`;
@@ -204,20 +197,13 @@ function displayForecast(response) {
 }
 
 function iconForecast(response, index) {
-  // Get weatherData from API
   let forecastDay = response.data.daily;
-  /* Get suitable icon for weather */
-  // Create new date representing the local Time
   const now = new Date();
-  // Converto to UTC Date
   const date = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-  // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + forecastDay.timezone * 1000;
   const localTime = new Date(millisecondsOffsetUTC);
-  // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(forecastDay[index].sunrise * 1000);
   const sunset = new Date(forecastDay[index].sunset * 1000);
-  // Get correct weather icon for day/night periods
   let forecastIcon = document.querySelector(`#forecast-${index}`);
   if (
     date.getHours() > sunrise.getHours() &&
