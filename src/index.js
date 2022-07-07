@@ -49,10 +49,12 @@ function displayCelsius(event) {
   mainTemp.innerHTML = `${tempConvert}`;
   for (let index = 1; index < 6; index++) {
     let forecastTemp = document.querySelector(`#forecast-temp-${[index]}`);
-    let newForecastTemp = ((forecastTemp[index] = 32.0) * 5.0) / 9.0;
+    let newForecastTemp = ((forecastTempMath[index] - 32.0) * 5.0) / 9.0;
     let forecastConvert = Math.round(newForecastTemp);
+    forecastTemp.innerHTML = `${forecastConvert}°C`;
   }
 }
+
 function displayFahrenheit(event) {
   event.preventDefault();
   let tempConvert = Math.round(tempMath);
@@ -61,9 +63,16 @@ function displayFahrenheit(event) {
   celsiusTemp.classList.add("inactive");
   fahrenheitTemp.classList.remove("inactive");
   mainTemp.innerHTML = `${tempConvert}`;
+  for (let index = 1; index < 6; index++) {
+    let forecastTemp = document.querySelector(`#forecast-temp-${[index]}`);
+    let newForecastTemp = forecastTempMath[index];
+    let forecastConvert = Math.round(newForecastTemp);
+    forecastTemp.innerHTML = `${forecastConvert}°F`;
+  }
 }
 
 let tempMath = 0;
+let forecastTempMath = ["0", "0", "0", "0", "0", "0"];
 
 let mainTemp = document.querySelector("#main-temp");
 let fahrenheitTemp = document.querySelector("#fahrenheit");
@@ -220,7 +229,7 @@ function displayForecast(response) {
   let forecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
+    if (index > 0 && index < 6) {
       forecastHTML =
         forecastHTML +
         `<div class="col">
@@ -229,7 +238,7 @@ function displayForecast(response) {
     ${iconForecast(response, index)}
     <br /><br />
     <span class="weather-forecast-temp" id="forecast-temp-${[index]}">
-    ${Math.round(forecastDay.temp.day)}</span>°<span class="f-symbol">F</span>
+    ${Math.round((forecastTempMath[index] = forecastDay.temp.day))}°F</span>
     </div>`;
     }
   });
