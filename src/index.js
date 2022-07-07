@@ -260,15 +260,12 @@ function iconForecast(response, index) {
   const localTime = new Date(millisecondsOffsetUTC);
   // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(forecastDay[index].sunrise * 1000);
-  console.log(sunrise.getHours());
+  console.log(sunrise);
   const sunset = new Date(forecastDay[index].sunset * 1000);
   console.log(sunset);
   // Get correct weather icon for day/night periods
   let forecastIcon = document.querySelector(`#forecast-${index}`);
-  if (
-    date.getHours() > sunrise.getHours() &&
-    date.getHours() < sunset.getHours()
-  ) {
+  if (date > sunrise && date < sunset) {
     return `<i class="weather-forecast-icon wi wi-owm-day-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
   } else {
     return `<i class="weather-forecast-icon wi wi-owm-night-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
