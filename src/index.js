@@ -91,7 +91,6 @@ function searchLocation(position) {
   let longitude = position.coords.longitude;
   let api1Url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(api1Url).then(showTemperature);
-  console.log(api1Url);
 }
 
 function getCurrentLocation(event) {
@@ -169,7 +168,6 @@ function searchDenver(event) {
 }
 
 function showTemperature(response) {
-  console.log(response.data);
   tempMath = response.data.main.temp;
   let tempConvert = Math.round(tempMath);
   let tempElement = document.querySelector("#main-temp");
@@ -225,7 +223,6 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
@@ -258,17 +255,12 @@ function iconForecast(response, index) {
   const now = new Date();
   // Converto to UTC Date
   const date = new Date(now.getTime());
-  console.log(date);
   // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + forecastDay.timezone * 1000;
-  console.log(millisecondsOffsetUTC);
   const localTime = new Date(millisecondsOffsetUTC);
-  console.log(localTime);
   // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(forecastDay[index].sunrise * 1000);
-  console.log(sunrise);
   const sunset = new Date(forecastDay[index].sunset * 1000);
-  console.log(sunset);
   // Get correct weather icon for day/night periods
   let forecastIcon = document.querySelector(`#forecast-${index}`);
   if (
