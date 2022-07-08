@@ -193,7 +193,7 @@ function iconDayNight(response) {
   // Create new date representing the local Time
   const now = new Date();
   // Converto to UTC Date
-  const date = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+  const date = new Date(now.getTime());
   // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + weatherData.timezone * 1000;
   const localTime = new Date(millisecondsOffsetUTC);
@@ -202,7 +202,10 @@ function iconDayNight(response) {
   const sunset = new Date(weatherData.sys.sunset * 1000);
   // Get correct weather icon for day/night periods
   let mainIcon = document.querySelector("#big-icon");
-  if (date > sunrise && date < sunset) {
+  if (
+    date.getHours() > sunrise.getHours() &&
+    date.getHours() < sunset.getHours()
+  ) {
     let mainIconID = `wi wi-owm-day-${weatherData.weather[0].id}`;
     mainIcon.className = mainIconID;
   } else {
@@ -254,10 +257,13 @@ function iconForecast(response, index) {
   // Create new date representing the local Time
   const now = new Date();
   // Converto to UTC Date
-  const date = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+  const date = new Date(now.getTime());
+  console.log(date);
   // timezone returns shift in seconds from UTC, convert to miliseconds and add to the date epoch time to get localTime
   const millisecondsOffsetUTC = date.getTime() + forecastDay.timezone * 1000;
+  console.log(millisecondsOffsetUTC);
   const localTime = new Date(millisecondsOffsetUTC);
+  console.log(localTime);
   // Get local sun phases and convert a unix timestamp to time
   const sunrise = new Date(forecastDay[index].sunrise * 1000);
   console.log(sunrise);
@@ -265,7 +271,10 @@ function iconForecast(response, index) {
   console.log(sunset);
   // Get correct weather icon for day/night periods
   let forecastIcon = document.querySelector(`#forecast-${index}`);
-  if (date > sunrise && date < sunset) {
+  if (
+    date.getHours() > sunrise.getHours() &&
+    date.getHours() < sunset.getHours()
+  ) {
     return `<i class="weather-forecast-icon wi wi-owm-day-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
   } else {
     return `<i class="weather-forecast-icon wi wi-owm-night-${forecastDay[index].weather[0].id}" id="forecast-${index}"></i>`;
@@ -273,7 +282,6 @@ function iconForecast(response, index) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "7c8d697d8d3773e49f9c0fff93db3e20";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
