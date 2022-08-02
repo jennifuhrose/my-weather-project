@@ -182,6 +182,7 @@ function showTemperature(response) {
   descriptor.innerHTML = response.data.weather[0].description;
   iconDayNight(response);
   getForecast(response.data.coord);
+  console.log(response);
 }
 
 function iconDayNight(response) {
